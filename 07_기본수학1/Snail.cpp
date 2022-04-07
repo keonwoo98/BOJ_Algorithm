@@ -3,16 +3,16 @@ using namespace std;
 
 int main(void)
 {
-	int day, night, tree;
-	int i, h;
+	int up, down, tree;
+	int day;
 
-	cin >> day >> night >> tree;
-	h = 1;
-	h += (tree - day) / (day - night);
-	if ((tree - day) % (day - night) != 0)
-		h++;
-	if (day >= tree)
+	cin >> up >> down >> tree;
+	day = 1;
+	day += (tree - up) / (up - down);
+	if ((tree - up) % (up - down))
+		day++;
+	if (up >= tree)
 		cout << "1" << endl;
 	else
-		cout << h << endl;
+		cout << day << endl;
 }
