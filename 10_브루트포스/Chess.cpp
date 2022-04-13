@@ -26,40 +26,21 @@ int main(void)
 				{
 					if ((row + col) % 2)
 					{
-						if (board[row][col] != 'W')
+						if (board[row][col] == 'W')
 							paint[index]++;
+						else
+							paint[index + 1]++;
 					}
 					else
 					{
-						if (board[row][col] != 'B')
+						if (board[row][col] == 'B')
 							paint[index]++;
+						else
+							paint[index + 1]++;
 					}
 				}
 			}
-			index++;
-		}
-	}
-	for (int i = 0; i < N - 7; i++)
-	{
-		for (int j = 0; j < M - 7; j++)
-		{
-			for (int row = i; row < i + 8; row++)
-			{
-				for (int col = j; col < j + 8; col++)
-				{
-					if ((row + col) % 2)
-					{
-						if (board[row][col] != 'B')
-							paint[index]++;
-					}
-					else
-					{
-						if (board[row][col] != 'W')
-							paint[index]++;
-					}
-				}
-			}
-			index++;
+			index += 2;
 		}
 	}
 	int min = paint[0];
