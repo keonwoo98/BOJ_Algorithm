@@ -3,9 +3,8 @@ using namespace std;
 
 int N, M;
 int arr[9] = { 0, };
-bool visited[9] = { 0, };
 
-void DFS(int cnt)
+void DFS(int num, int cnt)
 {
 	if (cnt == M)
 	{
@@ -14,20 +13,15 @@ void DFS(int cnt)
 		cout << '\n';
 		return ;
 	}
-	for (int i = 1; i <= N; i++)
+	for (int i = num; i <= N; i++)
 	{
-		if (!visited[i])
-		{
-			visited[i] = true;
-			arr[cnt] = i;
-			DFS(cnt + 1);
-			visited[i] = false;
-		}
+		arr[cnt] = i;
+		DFS(i, cnt + 1);
 	}
 }
 
 int main(void)
 {
 	cin >> N >> M;
-	DFS(0);
+	DFS(1, 0);
 }
