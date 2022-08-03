@@ -4,166 +4,179 @@ using namespace std;
 
 int main(void)
 {
-	int N, col, row, col2, row2;
+	int N;
+	int king[2];
+	int stone[2];
 	string K, S, move;
-	int board[8][8] = { 0, };
 
 	cin >> K >> S >> N;
-	board[K[1] - '1'][K[0] - 'A'] = 1;
-	board[S[1] - '1'][S[0] - 'A'] = 2;
-	col = K[1] - '1';
-	row = K[0] - 'A';
+	king[0] = 8 - (K[1] - '0');
+	king[1] = K[0] - 'A';
+	stone[0] = 8 - (S[1] - '0');
+	stone[1] = S[0] - 'A';
 	while (N--)
 	{
 		cin >> move;
 		if (move == "R")
 		{
-			if (row < 7)
+			if (king[1] + 1 < 8)
 			{
-				if (board[col][row + 1] == 2 && row == 6)
-					continue ;
-				if (board[col][row + 1] == 2 && row < 6)
+				king[1]++;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col][row + 1] = 0;
-					board[col][row + 2] = 2;
+					if (stone[1] + 1 < 8)
+						stone[1]++;
+					else
+						king[1]--;
 				}
-				board[col][row] = 0;
-				board[col][row + 1] = 1;
-				row++;
 			}
 		}
 		else if (move == "L")
 		{
-			if (row > 0)
+			if (king[1] - 1 >= 0)
 			{
-				if (board[col][row - 1] == 2 && row == 1)
-					continue ;
-				if (board[col][row - 1] == 2 && row > 1)
+				king[1]--;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col][row - 1] = 0;
-					board[col][row - 2] = 2;
+					if (stone[1] - 1 >= 0)
+						stone[1]--;
+					else
+						king[1]++;
 				}
-				board[col][row] = 0;
-				board[col][row - 1] = 1;
-				row--;
 			}
 		}
 		else if (move == "B")
 		{
-			if (col > 0)
+			if (king[0] + 1 < 8)
 			{
-				if (board[col - 1][row] == 2 && col == 1)
-					continue ;
-				if (board[col - 1][row] == 2 && col > 1)
+				king[0]++;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col - 1][row] = 0;
-					board[col - 2][row] = 2;
+					if (stone[0] + 1 < 8)
+						stone[0]++;
+					else
+						king[0]--;
 				}
-				board[col][row] = 0;
-				board[col - 1][row] = 1;
-				col--;
 			}
 		}
 		else if (move == "T")
 		{
-			if (col < 7)
+			if (king[0] - 1 >= 0)
 			{
-				if (board[col + 1][row] == 2 && col == 6)
-					continue ;
-				if (board[col + 1][row] == 2 && col < 6)
+				king[0]--;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col + 1][row] = 0;
-					board[col + 2][row] = 2;
+					if (stone[0] - 1 >= 0)
+						stone[0]--;
+					else
+						king[0]++;
 				}
-				board[col][row] = 0;
-				board[col + 1][row] = 1;
-				col++;
 			}
 		}
 		else if (move == "RT")
 		{
-			if (row < 7 && col < 7)
+			if (king[0] - 1 >= 0 && king[1] + 1 < 8)
 			{
-				if (board[col + 1][row + 1] == 2 && row == 6 && col == 6)
-					continue ;
-				if (board[col + 1][row + 1] == 2 && row < 6 && col < 6)
+				king[0]--;
+				king[1]++;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col + 1][row + 1] = 0;
-					board[col + 2][row + 2] = 2;
+					if (stone[0] - 1 >= 0 && stone[1] + 1 < 8)
+					{
+						stone[0]--;
+						stone[1]++;
+					}
+					else
+					{
+						king[0]++;
+						king[1]--;
+					}
 				}
-				board[col][row] = 0;
-				board[col + 1][row + 1] = 1;
-				col++;
 			}
 		}
 		else if (move == "LT")
 		{
-			if (row > 0 && col < 7)
+			if (king[0] - 1 >= 0 && king[1] - 1 >= 0)
 			{
-				if (board[col + 1][row - 1] == 2 && row == 1 && col == 6)
-					continue ;
-				if (board[col + 1][row - 1] == 2 && row > 1 && col < 6)
+				king[0]--;
+				king[1]--;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col + 1][row - 1] = 0;
-					board[col + 2][row - 2] = 2;
+					if (stone[0] - 1 >= 0 && stone[1] - 1 >= 0)
+					{
+						stone[0]--;
+						stone[1]--;
+					}
+					else
+					{
+						king[0]++;
+						king[1]++;
+					}
 				}
-				board[col][row] = 0;
-				board[col + 1][row - 1] = 1;
-				col++;
-				row--;
 			}
 		}
 		else if (move == "RB")
 		{
-			if (row < 7 && col > 0)
+			if (king[0] + 1 < 8 && king[1] + 1 < 8)
 			{
-				if (board[col - 1][row + 1] == 2 && row == 6 && col == 1)
-					continue ;
-				if (board[col - 1][row + 1] == 2 && row < 6 && col > 1)
+				king[0]++;
+				king[1]++;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col - 1][row + 1] = 0;
-					board[col - 2][row + 2] = 2;
+					if (stone[0] + 1 < 8 && stone[1] + 1 < 8)
+					{
+						stone[0]++;
+						stone[1]++;
+					}
+					else
+					{
+						king[0]--;
+						king[1]--;
+					}
 				}
-				board[col][row] = 0;
-				board[col - 1][row + 1] = 1;
-				col--;
-				row++;
 			}
 		}
 		else if (move == "LB")
 		{
-			if (row > 0 && col > 0)
+			if (king[0] + 1 < 8 && king[1] - 1 >= 0)
 			{
-				if (board[col - 1][row - 1] == 2 && row == 1 && col == 1)
-					continue ;
-				if (board[col - 1][row - 1] == 2 && row > 1 && col > 1)
+				king[0]++;
+				king[1]--;
+				if (king[0] == stone[0] && king[1] == stone[1])
 				{
-					board[col - 1][row - 1] = 0;
-					board[col - 2][row - 2] = 2;
+					if (stone[0] + 1 < 8 && stone[1] - 1 >= 0)
+					{
+						stone[0]++;
+						stone[1]--;
+					}
+					else
+					{
+						king[0]--;
+						king[1]++;
+					}
 				}
-				board[col][row] = 0;
-				board[col - 1][row - 1] = 1;
-				col--;
-				row--;
 			}
 		}
 	}
+	string str[2];
+	char ch = 'A';
+	int num;
 	for (int i = 0; i < 8; i++)
 	{
-		for (int j = 0; j < 8; j++)
-		{
-			if (board[i][j] == 1)
-			{
-				col = i;
-				row = j;
-			}
-			else if (board[i][j] == 2)
-			{
-				col2 = i;
-				row2 = j;
-			}
-		}
+		if (king[1] == i)
+			str[0] += ch;
+		ch++;
 	}
-	cout << char(row + 'A') << col + 1 << '\n';
-	cout << char(row2 + 'A') << col2 + 1 << '\n';
+	num = 8 - king[0];
+	str[0] += to_string(num);
+	ch = 'A';
+	for (int i = 0; i < 8; i++)
+	{
+		if (stone[1] == i)
+			str[1] += ch;
+		ch++;
+	}
+	num = 8 - stone[0];
+	str[1] += to_string(num);
+	cout << str[0] << '\n' << str[1] << '\n';
 }
