@@ -17,5 +17,5 @@ int main() {
 	m / 10 == 1 ? cout << m : cout << '0' << m;
 	cout << '-';
 	d / 10 == 1 ? cout << d : cout << '0' << d;
-	cout << endl;
+	cout << '\n';
 }
