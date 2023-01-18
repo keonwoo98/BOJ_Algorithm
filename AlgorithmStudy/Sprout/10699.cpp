@@ -12,8 +12,7 @@ int main() {
 	int m = t->tm_mon + 1;
 	int d = t->tm_mday;
 
-	cout << y;
-	cout << '-';
+	cout << y << '-';
 	m / 10 == 1 ? cout << m : cout << '0' << m;
 	cout << '-';
 	d / 10 == 1 ? cout << d : cout << '0' << d;
